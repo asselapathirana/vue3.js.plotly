@@ -1,7 +1,5 @@
 <script setup >
-import PlotlyBarEx from './components/PlotlyBarEx.vue'
 import PlotlyEx from './components/PlotlyEx.vue'
-import PlotlyScatEx from './components/PlotlyScatEx.vue'
 import DataChanger from './components/DataChanger.vue'
 </script>
 

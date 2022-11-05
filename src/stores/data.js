@@ -27,7 +27,6 @@ export const useDataStore = defineStore('counter', () => {
 
 })
 
-
 function setData() {
   return [{
     x: [1, 2, 3, 4],

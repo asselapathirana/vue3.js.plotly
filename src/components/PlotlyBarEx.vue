@@ -7,11 +7,16 @@
 <script setup>
 import { onMounted } from 'vue'
 import  Plotly  from 'plotly.js-dist/plotly'
-const data=[{ x: [1,2,3,4], y: [10,15,13,17], type:"scatter" }]
-const attr= { displayModeBar: true}
-const layout= { title: "My graph :)", margin: {l:20, r:20, t:30, b:20} }
+import { useDataStore } from '../stores/data'
+
+const storeData = useDataStore()
 onMounted(() => {
-  Plotly.newPlot('plot1', data, layout)
+  const d=storeData.chartData
+  Plotly.newPlot('plot1', d.data, d.layout, d.attrb)
+})
+storeData.$subscribe((mutation, state) => {
+  const d=storeData.chartData
+  Plotly.react('plot1', d.data, d.layout, d.attrb)
 })
 
 </script>

@@ -1,10 +1,14 @@
+
+
 <script setup >
+//import pinia store and instantiate
 import { useDataStore } from '../stores/data'
 const storeData = useDataStore()
 </script>
 
 <template>
-      <button  @click="storeData.changeData">CHANGE
+    <!-- Fires the changeData function in data.js pinia store -->
+    <button  @click="storeData.changeData">CHANGE
     </button>
 </template>
 

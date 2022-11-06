@@ -29,7 +29,9 @@ onMounted(() => {
 storeData.$subscribe((mutation, state) => {
   const d=get_data()
   // update plot (react - same signature as newPlot)
-  Plotly.react(id, d.data, d.layout, d.config)
+  //Plotly.react(id, d.data, d.layout, d.config)
+  // but there is a buggy behavior in window sizing so, use inefficient redraw!
+  Plotly.newPlot(id, d.data, d.layout, d.config)
 })
 
 function get_data() {

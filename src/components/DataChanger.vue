@@ -8,7 +8,7 @@ const storeData = useDataStore()
 
 <template>
     <!-- Fires the changeData function in data.js pinia store -->
-    <button  @click="storeData.changeData">CHANGE
+    <button  @click="storeData.changeData" class="btn btn-outline-info">Change data
     </button>
 </template>
 

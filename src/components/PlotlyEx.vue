@@ -1,12 +1,10 @@
 <template>
-  <div><h1> Hello </h1>
   <!-- Mustaches cannot be used inside HTML attributes. Instead, use a v-bind directive. v-bind:id= shortcut :id= -->
-  <div style="width:500px;height:400px;" :id="id"></div>
-  </div>
+  <div :id="id"></div>
 </template>
 
-<script setup>
 
+<script setup>
 import { ref, onMounted } from 'vue'
 import  Plotly  from 'plotly.js-dist/plotly'
 import uuid4 from "uuid4";
@@ -22,6 +20,7 @@ const id = uuid4()
 
 
 onMounted(() => {
+
   // get the current data
   const d=get_data()
   // create new plot
@@ -38,6 +37,9 @@ function get_data() {
   const d=storeData.chartData;
   d.data[0].type=props.type;
   d.data[0].fill=props.fill;
+  //d.layout["margin_autoexpand"]=false;
+  //d.layout["margin_r"]=240;
+  console.log("Layout",d.layout)
   return d;
 }
 </script>

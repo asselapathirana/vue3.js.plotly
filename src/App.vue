@@ -1,24 +1,7 @@
 <script setup >
-import PlotlyEx from './components/PlotlyEx.vue'
-import DataChanger from './components/DataChanger.vue'
+import MainPage from './components/MainPage.vue'
 </script>
-
 <template>
-  <header>
-    <div class="buttons">
-     <DataChanger />
-    </div>
-    <div class="wrapper">
-      <PlotlyEx type="bar" />
-    </div>
-    <div class="wrapper">
-      <PlotlyEx type="scatter" fill="tozeroy" />
-    </div>
-    <div class="wrapper">
-      <PlotlyEx type="scatter" />
-    </div>
-
-
-  </header>
+<MainPage />
 </template>
 

@@ -13,7 +13,7 @@ export const useDataStore = defineStore('counter', () => {
   // set their initial values
   data.value=setData()
   config.value= { displayModeBar: true }
-  layout.value= { title: "My graph :)", margin: {l:20, r:20, t:30, b:20} }
+  layout.value= { margin: {l:20, r:20, t:30, b:20} }
 
   //action to change data
   function changeData(){

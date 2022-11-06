@@ -1,3 +1,13 @@
+# Vue.js demo
+* Plotly.js for plotting
+* Vue.js 3
+* composition api
+* with <setup script>,
+* pinia for storing data centrally
+* Adding Bootstrap 5 support
+[see this](https://stackoverflow.com/questions/65547199/using-bootstrap-5-with-vue-3)
+
+
 # vue3plotly
 
 This template should help get you started developing with Vue 3 in Vite.

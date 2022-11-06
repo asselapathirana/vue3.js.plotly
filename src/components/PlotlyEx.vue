@@ -24,12 +24,12 @@ onMounted(() => {
   // get the current data
   const d=get_data()
   // create new plot
-  Plotly.newPlot(id, d.data, d.layout, d.attrb)
+  Plotly.newPlot(id, d.data, d.layout, d.config)
 })
 storeData.$subscribe((mutation, state) => {
   const d=get_data()
   // update plot (react - same signature as newPlot)
-  Plotly.react(id, d.data, d.layout, d.attrb)
+  Plotly.react(id, d.data, d.layout, d.config)
 })
 
 function get_data() {
@@ -39,7 +39,7 @@ function get_data() {
   d.data[0].fill=props.fill;
   //d.layout["margin_autoexpand"]=false;
   //d.layout["margin_r"]=240;
-  console.log("Layout",d.layout)
+  console.log("Config",d.config)
   return d;
 }
 </script>

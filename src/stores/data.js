@@ -8,11 +8,11 @@ export const useDataStore = defineStore('counter', () => {
   // see https://pinia.vuejs.org/core-concepts/#setup-stores
   //following are state properties:
   const data = ref([])
-  const attr = ref({})
+  const config = ref({})
   const layout = ref({})
   // set their initial values
   data.value=setData()
-  attr.value= { displayModeBar: true}
+  config.value= { displayModeBar: true }
   layout.value= { title: "My graph :)", margin: {l:20, r:20, t:30, b:20} }
 
   //action to change data
@@ -23,10 +23,10 @@ export const useDataStore = defineStore('counter', () => {
   const chartData = computed(() => 
   //Plotly seem to mutate these values. So, to ensure it does not happen, we deepcopy things. 
             ({data: JSON.parse(JSON.stringify(data.value)), 
-              attr: JSON.parse(JSON.stringify(attr.value)), 
+              config: JSON.parse(JSON.stringify(config.value)), 
               layout: JSON.parse(JSON.stringify(layout.value)) }))
   // pinia requires to return the data
-  return { data, attr, layout , changeData, chartData}
+  return { data, config, layout , changeData, chartData}
 
 })
 

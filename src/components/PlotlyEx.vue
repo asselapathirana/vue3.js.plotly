@@ -5,12 +5,59 @@
 
 
 <script setup>
-import { ref, onMounted } from 'vue'
+
+import { ref, onMounted, computed, onUnmounted } from 'vue'
 import  Plotly  from 'plotly.js-dist/plotly'
 import uuid4 from "uuid4";
 // import pinia store and instantiate
 import { useDataStore } from '../stores/data'
 const storeData = useDataStore()
+
+
+// debounce code https://dev.to/sandrarodgers/listen-for-and-debounce-window-resize-event-in-vuejs-2pn2
+const debouncedHeight=  0
+const debouncedWidth=  0
+const heightTimeout=  null
+const widthTimeout =  null
+
+const width = computed({
+        
+        get(){  
+            return  this.debouncedHeight;
+        },
+        set(val)  {
+            if  (this.heightTimeout)  clearTimeout(this.heightTimeout);
+                this.heightTimeout =  setTimeout(()  =>  {
+                this.debouncedHeight = val;
+            },  1000);
+        },
+})
+
+const height = computed({
+  get()  {
+        return  this.debouncedWidth;
+    },
+        set(val)  {
+            if  (this.widthTimeout)  clearTimeout(this.widthTimeout);
+                this.widthTimeout =  setTimeout(()  =>  {
+                this.debouncedWidth = val;
+            },  1000);
+        },
+})
+
+const replot = function replot(e){
+ const d=get_data()
+  // update plot (react - same signature as newPlot)
+  //Plotly.react(id, d.data, d.layout, d.config)
+  // but there is a buggy behavior in window sizing so, use inefficient redraw!
+  Plotly.newPlot(id, d.data, d.layout, d.config)
+
+}
+
+//end debounce code
+
+
+
 
 // template props are defined. Then they can be accessed as props.type etc.
 const props = defineProps(['type', 'fill'])
@@ -18,8 +65,13 @@ const props = defineProps(['type', 'fill'])
 // generate id as unique
 const id = uuid4()
 
+onUnmounted(()=>{
+  window.removeEventListener("resize", replot);
 
+})
 onMounted(() => {
+  // resize - replot
+   window.addEventListener("resize", replot);
 
   // get the current data
   const d=get_data()

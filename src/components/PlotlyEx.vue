@@ -3,7 +3,6 @@
   <div :id="id"></div>
 </template>
 
-
 <script setup>
 
 import { ref, onMounted, computed, onUnmounted } from 'vue'
@@ -45,12 +44,18 @@ const height = computed({
         },
 })
 
-const replot = function replot(e){
+function newPlot(newplot=true){
  const d=get_data()
   // update plot (react - same signature as newPlot)
   //Plotly.react(id, d.data, d.layout, d.config)
   // but there is a buggy behavior in window sizing so, use inefficient redraw!
-  Plotly.newPlot(id, d.data, d.layout, d.config)
+  if(newplot){
+    Plotly.newPlot(id, d.data, d.layout, d.config)
+  }
+  else{
+    Plotly.react(id, d.data, d.layout, d.config)
+  }
+  console.log("newPlotting: ", id)
 
 }
 
@@ -66,24 +71,17 @@ const props = defineProps(['type', 'fill'])
 const id = uuid4()
 
 onUnmounted(()=>{
-  window.removeEventListener("resize", replot);
+  window.removeEventListener("resize", newPlot);
 
 })
 onMounted(() => {
-  // resize - replot
-   window.addEventListener("resize", replot);
+  // resize - newPlot
+   window.addEventListener("resize", newPlot);
 
-  // get the current data
-  const d=get_data()
-  // create new plot
-  Plotly.newPlot(id, d.data, d.layout, d.config)
+  newPlot()
 })
 storeData.$subscribe((mutation, state) => {
-  const d=get_data()
-  // update plot (react - same signature as newPlot)
-  //Plotly.react(id, d.data, d.layout, d.config)
-  // but there is a buggy behavior in window sizing so, use inefficient redraw!
-  Plotly.newPlot(id, d.data, d.layout, d.config)
+  newPlot(false)
 })
 
 function get_data() {
@@ -93,7 +91,7 @@ function get_data() {
   d.data[0].fill=props.fill;
   //d.layout["margin_autoexpand"]=false;
   //d.layout["margin_r"]=240;
-  console.log("Config",d.config)
+  //console.log("Config",d.config)
   return d;
 }
 </script>

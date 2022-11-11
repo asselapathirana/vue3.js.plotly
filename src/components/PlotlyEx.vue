@@ -55,17 +55,13 @@ function newPlot(newplot=true){
   else{
     Plotly.react(id, d.data, d.layout, d.config)
   }
-  console.log("newPlotting: ", id)
+  //console.log("newPlotting: ", id)
 
 }
-
 //end debounce code
 
-
-
-
 // template props are defined. Then they can be accessed as props.type etc.
-const props = defineProps(['type', 'fill'])
+const props = defineProps(['type', 'fill', 'hole'])
 
 // generate id as unique
 const id = uuid4()
@@ -86,12 +82,21 @@ storeData.$subscribe((mutation, state) => {
 
 function get_data() {
   // get chart data from pina store and customize
-  const d=storeData.chartData;
+  const d=storeData.getData(props.type);
   d.data[0].type=props.type;
   d.data[0].fill=props.fill;
+  if (props.hole){
+    console.log("Hole:", props.hole)
+    d.data[0]["hole"]=props.hole
+  }
+  if (props.type=="bubble"){
+    d.data[0]['mode']='markers',
+    d.data[0]['marker']={size: d.data[0].y}
+  
+  }
   //d.layout["margin_autoexpand"]=false;
   //d.layout["margin_r"]=240;
-  //console.log("Config",d.config)
+  //console.log("all",d.data, d.config, d.layout)
   return d;
 }
 </script>

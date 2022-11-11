@@ -20,15 +20,38 @@ export const useDataStore = defineStore('counter', () => {
     data.value=setData()
   }
   // getter for chartData
-  const chartData = computed(() => 
+  // const chartData = computed(() => 
+  // //Plotly seem to mutate these values. So, to ensure it does not happen, we deepcopy things. 
+  //           ({data: JSON.parse(JSON.stringify(data.value)), 
+  //             config: JSON.parse(JSON.stringify(config.value)), 
+  //             layout: JSON.parse(JSON.stringify(layout.value)) }))
+
+
+function getData(type){
+  var d = data.value
+
+  if (type=="pie"){
+    d=[{values: data.value[0].y,
+      labels: data.value[0].x,
+      type:type, 
+      sort:false}]
+  }
+
+  const c=config.value
+  const l=layout.value
+
   //Plotly seem to mutate these values. So, to ensure it does not happen, we deepcopy things. 
-            ({data: JSON.parse(JSON.stringify(data.value)), 
-              config: JSON.parse(JSON.stringify(config.value)), 
-              layout: JSON.parse(JSON.stringify(layout.value)) }))
+  return  {data: JSON.parse(JSON.stringify(d)), 
+    config: JSON.parse(JSON.stringify(c)), 
+    layout: JSON.parse(JSON.stringify(l)) }
+}
+
   // pinia requires to return the data
-  return { data, config, layout , changeData, chartData}
+  return { data, config, layout , changeData,  getData}
 
 })
+
+
 
 function setData() {
   return [{

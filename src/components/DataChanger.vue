@@ -1,5 +1,3 @@
-
-
 <script setup >
 //import pinia store and instantiate
 import { useDataStore } from '../stores/data'

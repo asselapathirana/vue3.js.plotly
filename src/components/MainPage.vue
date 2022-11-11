@@ -1,6 +1,7 @@
 <script setup >
 import PlotlyEx from './PlotlyEx.vue'
 import DataChanger from './DataChanger.vue'
+import TimeTrigger from './TimeTrigger.vue'
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import DataChanger from './DataChanger.vue'
   <h1>Plotly with Vue.js 3, Pinia and Bootstrap 5</h1>
   <p>Presse the button to see the effect!</p> 
   <data-changer />
+  <time-trigger />
 </div>
   
 <div class="container mt-5">

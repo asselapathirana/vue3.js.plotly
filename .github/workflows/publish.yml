@@ -1,0 +1,13 @@
+name: Run deploy.sh
+run-name: ${{ github.actor }} running deploy.sh 
+on: [push]
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run deploys.sh
+        run: ./ deploy.sh
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."

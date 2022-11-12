@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run deploys.sh
-        run: ./ deploy.sh
+        run: sh deploy.sh
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}

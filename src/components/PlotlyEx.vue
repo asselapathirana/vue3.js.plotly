@@ -86,7 +86,6 @@ function get_data() {
   d.data[0].type=props.type;
   d.data[0].fill=props.fill;
   if (props.hole){
-    console.log("Hole:", props.hole)
     d.data[0]["hole"]=props.hole
   }
   if (props.type=="bubble"){

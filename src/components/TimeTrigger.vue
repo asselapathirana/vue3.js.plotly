@@ -7,7 +7,6 @@ const isActive = ref(false)
 const interval = ref()
 
 function toggle() {
-  console.log("Toggle")
   if (!isActive.value) {
     isActive.value = true;
     interval.value=setInterval(storeData.changeData, 1000)

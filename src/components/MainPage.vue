@@ -8,7 +8,7 @@ import TimeTrigger from './TimeTrigger.vue'
 
 <div class="container-fluid p-5 bg-primary text-white text-center">
   <h1>Plotly with Vue.js 3, Pinia and Bootstrap 5</h1>
-  <p>Presse the button to see the effect!</p> 
+  <p>Presse one of the buttons.</p> 
   <data-changer />
   <time-trigger />
 </div>
